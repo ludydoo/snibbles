@@ -31,7 +31,7 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		ints := uniqueRandomInts()
+		ints := uniqueRandomInts(30)
 		node = bst2.New(ints...)
 		selected = node
 
@@ -94,14 +94,19 @@ to quickly create a Cobra application.`,
 	},
 }
 
-func uniqueRandomInts() []int {
+func uniqueRandomInts(n int) []int {
 	var m = map[int]struct{}{}
 	var ints []int
-	for i := 0; i < 100; i++ {
+	var i int
+	for {
 		r := rand.Intn(100)
 		if _, ok := m[r]; !ok {
 			ints = append(ints, r)
 			m[r] = struct{}{}
+			i++
+		}
+		if i == n {
+			break
 		}
 	}
 	return ints
