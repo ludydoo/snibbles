@@ -30,6 +30,8 @@ left  - select left child
 right - select right child
 n     - in order successor
 p     - in order predecessor
+i     - insert a node
+d     - delete the selected node
 ```
 
 ![BST](images/bst.gif)
