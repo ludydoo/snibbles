@@ -18,8 +18,6 @@ Just a few snibbles and reimplementing some of the most popular data structures 
 
 ## Games
 
-________
-
 ### Binary Search Tree
 
 `go run . bst`
@@ -35,5 +33,3 @@ p     - in order predecessor
 ```
 
 ![BST](images/bst.gif)
-
-________
