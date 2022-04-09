@@ -6,14 +6,19 @@ Just a few snibbles and reimplementing some of the most popular data structures 
 
 - [Binary Seach Tree (Generic)](pkg/bst)
 - [Binary Seach Tree (Iterative)](pkg/bst2)
-- [Dijkstra's Algorithm](pkg/dijkstra)
 - [Hashmap](pkg/hashmap)
 - [Heap](pkg/heap)
 - [Linked List](pkg/linkedlist)
 - [Queue](pkg/queue)
 - [Stack](pkg/stack)
 
+## Algorithms
+
+- [Dijkstra's Algorithm](pkg/dijkstra)
+
 ## Games
+
+________
 
 ### Binary Search Tree
 
@@ -30,3 +35,5 @@ p     - in order predecessor
 ```
 
 ![BST](images/bst.gif)
+
+________
