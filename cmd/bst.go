@@ -10,14 +10,15 @@ import (
 	"github.com/nsf/termbox-go"
 	"github.com/spf13/cobra"
 	"golang.org/x/exp/rand"
+	"strconv"
 	"strings"
 	"time"
 )
 
-var backbuf []termbox.Cell
-var bbw, bbh int
 var node *bst2.Node
 var selected *bst2.Node
+var isInserting bool
+var insertText string
 
 // bstCmd represents the bst command
 var bstCmd = &cobra.Command{
@@ -55,11 +56,37 @@ to quickly create a Cobra application.`,
 			case ev := <-event_queue:
 				if ev.Type == termbox.EventKey {
 					if ev.Key == termbox.KeyEsc {
-						break loop
+						if isInserting {
+							isInserting = false
+						} else {
+							break loop
+						}
 					} else {
 
 						if selected == nil {
 							selected = node
+						}
+
+						if isInserting {
+							if ev.Key == termbox.KeyEnter {
+								val, err := strconv.Atoi(insertText)
+								if err != nil {
+									continue
+								}
+								bst2.Insert(node, val)
+								insertText = ""
+								isInserting = false
+							} else if ev.Key == termbox.KeyBackspace || ev.Key == termbox.KeyBackspace2 {
+								if len(insertText) > 0 {
+									insertText = insertText[:len(insertText)-1]
+								}
+							} else {
+								r := ev.Ch
+								if r >= '0' && r <= '9' {
+									insertText += string(r)
+								}
+							}
+							continue
 						}
 
 						if ev.Key == termbox.KeyArrowLeft {
@@ -82,6 +109,24 @@ to quickly create a Cobra application.`,
 							if successor != nil {
 								selected = successor
 							}
+						} else if ev.Ch == 'd' {
+							if selected != nil {
+								toDelete := selected
+								if toDelete.Right != nil && toDelete.Left != nil {
+									selected = toDelete
+								} else if toDelete.Right != nil {
+									selected = toDelete.Right
+								} else if toDelete.Left != nil {
+									selected = toDelete.Left
+								} else if selected == node {
+									continue
+								} else {
+									selected = bst2.GetParent(node, toDelete.Key)
+								}
+								node = bst2.DeleteKey(node, toDelete.Key)
+							}
+						} else if ev.Ch == 'i' {
+							isInserting = true
 						}
 					}
 				}
@@ -127,13 +172,22 @@ func draw() {
 	rightCmd := "Right Arrow to select right child"
 	nextCmd := "n to select successor"
 	prevCmd := "p to select predecessor"
-	cmds := []string{upCmd, leftCmd, rightCmd, nextCmd, prevCmd}
+	insertCmd := "i to insert"
+	deleteCmd := "d to delete the selected node"
+	cmds := []string{upCmd, leftCmd, rightCmd, nextCmd, prevCmd, insertCmd, deleteCmd}
 	cmdCount := len(cmds)
 
-	for l, cmd := range cmds {
-		cmdRunes := []rune(cmd)
-		for i := 0; i < len(cmdRunes); i++ {
-			termbox.SetCell(i, l, cmdRunes[i], termbox.ColorDefault, termbox.ColorDefault)
+	if !isInserting {
+		for l, cmd := range cmds {
+			cmdRunes := []rune(cmd)
+			for i := 0; i < len(cmdRunes); i++ {
+				termbox.SetCell(i, l, cmdRunes[i], termbox.ColorDefault, termbox.ColorDefault)
+			}
+		}
+	} else {
+		insertRunes := []rune(insertText)
+		for i, insertRune := range insertRunes {
+			termbox.SetCell(i, 0, insertRune, termbox.ColorDefault, termbox.ColorDefault)
 		}
 	}
 
