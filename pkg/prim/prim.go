@@ -26,7 +26,7 @@ package prim
 
 import "math"
 
-func PrimsAlgorithm(mat [][]int) {
+func PrimsAlgorithm(mat [][]int) [][]int {
 
 	var (
 		// number of vertices
@@ -73,5 +73,12 @@ func PrimsAlgorithm(mat [][]int) {
 	for i := 0; i < numNodes; i++ {
 		println(predNode[i], "-->", i)
 	}
+
+	var result [][]int
+	for i := 0; i < numNodes; i++ {
+		result = append(result, []int{predNode[i], i})
+	}
+
+	return result
 
 }

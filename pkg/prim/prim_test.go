@@ -24,16 +24,25 @@
 
 package prim
 
-import "testing"
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 func TestPrim(t *testing.T) {
-
-	PrimsAlgorithm([][]int{
+	actual := PrimsAlgorithm([][]int{
 		{0, 4, 0, 0, 5},
 		{4, 0, 3, 6, 1},
 		{0, 3, 0, 6, 2},
 		{0, 6, 6, 0, 7},
 		{5, 1, 2, 7, 0},
 	})
-
+	expected := [][]int{
+		{0, 0},
+		{0, 1},
+		{4, 2},
+		{1, 3},
+		{1, 4},
+	}
+	assert.Equal(t, expected, actual)
 }
