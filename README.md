@@ -11,6 +11,7 @@ Just a few snibbles and reimplementing some of the most popular data structures 
 - [Linked List](pkg/linkedlist)
 - [Queue](pkg/queue)
 - [Stack](pkg/stack)
+- [Disjoint Set](pkg/disjointset)
 
 ## Algorithms
 
