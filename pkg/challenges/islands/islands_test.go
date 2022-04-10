@@ -37,6 +37,28 @@ func TestIslands(t *testing.T) {
 		expect [][]int
 	}{
 		{
+			name:   "zero",
+			mat:    [][]int{},
+			expect: [][]int{},
+		}, {
+			name: "1x1",
+			mat: [][]int{
+				{1},
+			},
+			expect: [][]int{
+				{1},
+			},
+		}, {
+			name: "2x2",
+			mat: [][]int{
+				{0, 0},
+				{0, 1},
+			},
+			expect: [][]int{
+				{0, 0},
+				{0, 1},
+			},
+		}, {
 			name: "simple",
 			mat: [][]int{
 				{0, 0, 0},

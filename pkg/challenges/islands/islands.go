@@ -156,11 +156,6 @@ func newDset(w, h int) *dset {
 	}
 }
 
-// connected returns true if the two vertices are connected
-func (d *dset) connected(v1, v2 int) bool {
-	return d.find(v1) == d.find(v2)
-}
-
 // find returns the parent of the node
 func (d *dset) find(v int) int {
 	if d.parent[v] == v {
