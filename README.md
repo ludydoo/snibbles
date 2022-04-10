@@ -40,7 +40,7 @@ d     - delete the selected node
 
 ### Maze Generator
 
-`go run . maze`
+`go run . maze --width 10 --height 10`
 
 #### Commands
 

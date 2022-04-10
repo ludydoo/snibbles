@@ -35,12 +35,16 @@ func init() {
 }
 
 var maze [][]bool
+var mazeWidth int
+var mazeHeight int
 
 func createNewMaze(callback func()) {
-	maze = NewMaze(60, 50, callback)
+	maze = NewMaze(mazeWidth, mazeHeight, callback)
 }
 
-func Run() error {
+func Run(width, height int) error {
+	mazeWidth = width
+	mazeHeight = height
 
 	err := termbox.Init()
 	if err != nil {
@@ -67,12 +71,13 @@ loop:
 				} else {
 					createNewMaze(func() {
 						draw()
+						time.Sleep(time.Nanosecond * 1000000)
 					})
 				}
 			}
 		default:
 			draw()
-			// time.Sleep(time.Millisecond)
+			time.Sleep(10 * time.Millisecond)
 		}
 	}
 

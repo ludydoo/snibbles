@@ -29,16 +29,27 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var mazeWidth int
+var mazeHeight int
+
 // mazeCmd represents the maze command
 var mazeCmd = &cobra.Command{
 	Use:   "maze",
 	Short: "Simple maze generator",
 	Long:  `Generates random mazes using the Kruskal's algorithm.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return mazegen.Run()
+		if mazeWidth <= 0 {
+			mazeWidth = 20
+		}
+		if mazeHeight <= 0 {
+			mazeHeight = 20
+		}
+		return mazegen.Run(mazeWidth, mazeHeight)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(mazeCmd)
+	mazeCmd.Flags().IntVar(&mazeWidth, "width", 30, "Width of the maze")
+	mazeCmd.Flags().IntVar(&mazeHeight, "height", 30, "Height of the maze")
 }
