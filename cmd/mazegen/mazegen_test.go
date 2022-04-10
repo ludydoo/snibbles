@@ -140,69 +140,6 @@ func TestGetVertices(t *testing.T) {
 
 }
 
-func TestGetNeighbours(t *testing.T) {
-	testCases := []struct {
-		name   string
-		w      int
-		expect [][]int
-	}{
-		{
-			// 0 - 1 - 2 - 3
-			// |   |   |   |
-			// 4 - 5 - 6 - 7
-			// |   |   |   |
-			// 8 - 9 - 10 - 11
-			// |   |   |   |
-			// 12- 13- 14- 15
-			name: "4x4",
-			w:    4,
-			expect: [][]int{
-				{-1, 1, 4, -1},
-				{-1, 2, 5, 0},
-				{-1, 3, 6, 1},
-				{-1, -1, 7, 2},
-				{0, 5, 8, -1},
-				{1, 6, 9, 4},
-				{2, 7, 10, 5},
-				{3, -1, 11, 6},
-				{4, 9, 12, -1},
-				{5, 10, 13, 8},
-				{6, 11, 14, 9},
-				{7, -1, 15, 10},
-				{8, 13, -1, -1},
-				{9, 14, -1, 12},
-				{10, 15, -1, 13},
-				{11, -1, -1, 14},
-			},
-		},
-	}
-	for _, testCase := range testCases {
-		t.Run(testCase.name, func(t *testing.T) {
-			for expectIdx, expect := range testCase.expect {
-				t.Run(strconv.Itoa(expectIdx), func(t *testing.T) {
-
-					top, right, bottom, left := getNeighbours(expectIdx, testCase.w)
-					expectTop := expect[0]
-					expectRight := expect[1]
-					expectBottom := expect[2]
-					expectLeft := expect[3]
-
-					t.Logf("Case #%d", expectIdx)
-					t.Logf("Top. Expect %d. Got %d", expectTop, top)
-					t.Logf("Right. Expect %d. Got %d", expectRight, right)
-					t.Logf("Bottom. Expect %d. Got %d", expectBottom, bottom)
-					t.Logf("Left. Expect %d. Got %d", expectLeft, left)
-
-					assert.Equal(t, expectTop, top, "Top")
-					assert.Equal(t, expectRight, right, "Right")
-					assert.Equal(t, expectBottom, bottom, "Bottom")
-					assert.Equal(t, expectLeft, left, "Left")
-				})
-			}
-		})
-	}
-}
-
 func TestNewMaze(t *testing.T) {
 	NewMaze(40, 20)
 }
