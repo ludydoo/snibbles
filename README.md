@@ -15,6 +15,7 @@ Just a few snibbles and reimplementing some of the most popular data structures 
 ## Algorithms
 
 - [Dijkstra's Algorithm](pkg/dijkstra)
+- [Kruskal's Algorithm](pkg/kruskal)
 
 ## Games
 
