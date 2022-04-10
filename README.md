@@ -1,6 +1,7 @@
 # About
 
-Just a few snibbles and reimplementing some of the most popular data structures in Go.
+Just a few bobs and snibbles. Implementing
+some data structures, challenges and games in Go and stuff.
 
 ## Data Structures
 
@@ -19,7 +20,10 @@ Just a few snibbles and reimplementing some of the most popular data structures 
 - [Kruskal's Algorithm](pkg/kruskal)
 - [Prim's Algorithm](pkg/prim)
 - [Bellman-Ford Algorithm](pkg/bellmanford)
-- 
+
+# Challenges
+
+- [Remove Islands](pkg/challenges/islands)
 
 ## Games
 
