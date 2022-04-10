@@ -75,23 +75,13 @@ func RemoveIslands(mat [][]int) [][]int {
 			if mat[row][col] == 0 {
 				continue
 			}
-			// if we are not on the last column
-			if col < width-1 {
-				// this is the value of the right neighbour
-				right := mat[row][col+1]
-				// if the neighbour is = 1 also, union with the vertex
-				if right == 1 {
-					set.union(vertexId, vertexId+1)
-				}
+			// if we are not on the last column, and the right neighboor is 1,
+			if col < width-1 && mat[row][col+1] == 1 {
+				set.union(vertexId, vertexId+1)
 			}
-			// if we are not on the last row
-			if row < height-1 {
-				// this is the value of the bottom neighbour
-				bottom := mat[row+1][col]
-				// if the neighbour = 1 also, union with the vertex
-				if bottom == 1 {
-					set.union(vertexId, vertexId+width)
-				}
+			// if we are not on the last row, and the bottom neighboor is 1,
+			if row < height-1 && mat[row+1][col] == 1 {
+				set.union(vertexId, vertexId+width)
 			}
 		}
 	}
@@ -104,13 +94,11 @@ func RemoveIslands(mat [][]int) [][]int {
 	// so no need to check them
 	for row := 1; row < width-1; row++ {
 		for col := 1; col < height-1; col++ {
-			vIdx := row*width + col
-			vertex := mat[row][col]
-			if vertex == 0 {
+			if mat[row][col] == 0 {
 				continue
 			}
-			parent := set.find(vIdx)
-			if !set.isEdge(parent) {
+			// if the vertex is not connected to one of the edges, it is an island
+			if !set.isEdge(set.find(row*width + col)) {
 				mat[row][col] = 0
 			}
 		}
@@ -196,8 +184,7 @@ func (d *dset) union(v1, v2 int) {
 }
 
 func (d *dset) isEdge(root1 int) bool {
-	v1Row := root1 / d.w
-	v1Col := root1 % d.w
-	v1IsEdge := v1Row == 0 || v1Col == 0 || v1Row == d.h-1 || v1Col == d.w-1
-	return v1IsEdge
+	row := root1 / d.w
+	col := root1 % d.w
+	return row == 0 || col == 0 || row == d.h-1 || col == d.w-1
 }
