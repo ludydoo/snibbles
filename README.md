@@ -37,3 +37,16 @@ d     - delete the selected node
 ```
 
 ![BST](images/bst.gif)
+
+### Maze Generator
+
+`go run . maze`
+
+#### Commands
+
+```
+press any key to generate a new maze
+press escape to exit
+```
+
+![BST](images/maze.gif)
