@@ -18,6 +18,7 @@ Just a few snibbles and reimplementing some of the most popular data structures 
 - [Dijkstra's Algorithm](pkg/dijkstra)
 - [Kruskal's Algorithm](pkg/kruskal)
 - [Prim's Algorithm](pkg/prim)
+- [Bellman-Ford Algorithm](pkg/bellmanford)
 
 ## Games
 
