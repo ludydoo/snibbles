@@ -25,9 +25,9 @@ some data structures, challenges and games in Go and stuff.
 
 - [Remove Islands](pkg/challenges/islands)
 
-## Games
+## Games and Stuff
 
-### Binary Search Tree
+### [Binary Search Tree](pkg/cmd/bstgame)
 
 `go run . bst`
 
@@ -45,7 +45,7 @@ d     - delete the selected node
 
 ![BST](images/bst.gif)
 
-### Maze Generator
+### [Maze Generator](pkg/cmd/mazegen)
 
 `go run . maze --width 10 --height 10`
 
@@ -57,3 +57,23 @@ press escape to exit
 ```
 
 ![BST](images/maze.gif)
+
+### [Gossip Protocol](pkg/cmd/gossip)
+
+This is a simple implementation of the [Gossip Protocol](https://en.wikipedia.org/wiki/Gossip_protocol).
+
+This server accepts key-value pairs, and propagates the values throughout the cluster.
+
+```
+# First, start the gossip servers
+go run . gossip --addr localhost:8080 
+go run . gossip --addr localhost:8081 --seed localhost:8080
+
+# Send new key pairs to the gossip servers
+curl -i -X POST http://localhost:8081 -H "Content-Type: application/json" -d '{"a":"n"}'
+
+# Observe the values being replicated
+```
+
+![BST](images/gossip.gif)
+
